@@ -52,9 +52,20 @@ func cardErrorMessage(code stripe.ErrorCode) string {
 	switch code {
 	case stripe.ErrorCodeCardDeclined:
 		msg = "Your Card Was Declined ."
-
 	case stripe.ErrorCodeExpiredCard:
 		msg = "Your Card Is Expired ."
+	case stripe.ErrorCodeIncorrectCVC:
+		msg = "You Have Entered Incorrect CVC Code ."
+	case stripe.ErrorCodeIncorrectZip:
+		msg = "You Have Entered Incorrect Zip/Postal Code ."
+	case stripe.ErrorCodeAmountTooLarge:
+		msg = "You Have Entered Amount Too Large ."
+	case stripe.ErrorCodeAmountTooSmall:
+		msg = "You Have Entered Amount Too Small ."
+	case stripe.ErrorCodeBalanceInsufficient:
+		msg = "Your Card Has Insufficient Balance ."
+	case stripe.ErrorCodePostalCodeInvalid:
+		msg = "You Have Entered Incorrect Postal Code ."
 	default:
 		msg = "Your Card Was Declined ."
 	}
