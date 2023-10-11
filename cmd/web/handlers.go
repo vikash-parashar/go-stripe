@@ -19,3 +19,6 @@ type Invoice struct {
 func (app *application) VirtualTerminal(w http.ResponseWriter, r *http.Request) {
 	app.infoLog.Println("Hit the handler")
 }
+func (app *application) PaymentSucceeded(w http.ResponseWriter, r *http.Request) {
+	//TODO:
+}
