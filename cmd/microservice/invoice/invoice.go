@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"log"
-	"os"
 )
 
 const version = "1.0.0"
@@ -30,24 +29,11 @@ func main() {
 	var cfg config
 
 	flag.IntVar(&cfg.port, "port", 4001, "server port to listen")
-	flag.StringVar(&cfg.env, "env", "development", "Application Environment {development|production|maintenance}")
+	flag.StringVar(&cfg.smtp.host, "smtphost", "smtp.mailtrap.io", "smtp host")
+	flag.StringVar(&cfg.smtp.username, "smtpuser", "", "smtp username")
+	flag.StringVar(&cfg.smtp.password, "smtppass", "", "smtp password")
+	flag.IntVar(&cfg.smtp.port, "smtpport", 587, "smtp port")
 
 	flag.Parse()
 
-	cfg.stripe.key = os.Getenv("STRIPE_KEY")
-	cfg.stripe.secret = os.Getenv("STRIPE_SECRET")
-	infoLog := log.New(os.Stdout, "INFO : \t", log.Ldate|log.Ltime)
-	errorLog := log.New(os.Stdout, "ERROR : \t", log.Ldate|log.Ltime|log.Lshortfile)
-
-	app := &application{
-		config:   cfg,
-		infoLog:  infoLog,
-		errorLog: errorLog,
-		version:  version,
-	}
-
-	err := app.Server()
-	if err != nil {
-		log.Fatal(err)
-	}
 }
