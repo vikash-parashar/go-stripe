@@ -36,6 +36,7 @@ type application struct {
 	infoLog  *log.Logger
 	errorLog *log.Logger
 	version  string
+	DB       string //FIXME:
 }
 
 func (app *application) Server() error {
@@ -61,7 +62,7 @@ func main() {
 	flag.StringVar(&cfg.smtp.password, "smtppass", "", "smtp password")
 	flag.IntVar(&cfg.smtp.port, "smtpport", 587, "smtp port")
 	flag.StringVar(&cfg.secretkey, "secretkey", "", "")
-	flag.StringVar(&cfg.frontend, "frontend", "", "")
+	flag.StringVar(&cfg.frontend, "frontend", "http://localhost:4000", "url to front end")
 
 	flag.Parse()
 
@@ -75,6 +76,7 @@ func main() {
 		infoLog:  infoLog,
 		errorLog: errorLog,
 		version:  version,
+		DB:       "", //FIXME:
 	}
 
 	err := app.Server()
