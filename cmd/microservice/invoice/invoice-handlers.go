@@ -25,12 +25,17 @@ func (app *application) CreateAndSendInvoice(w http.ResponseWriter, r *http.Requ
 		return
 	}
 
-	// create mail
-	//FIXME:
+	// create mail attachments
+	attachments := []string{
+		fmt.Sprintf("./invoices/%d.pdf", order.ID),
+	}
 
 	// send mail with attachment
-	//FIXME:
-
+	err = app.SendMail("info.widget.com", order.Email, "Your Order Invoice", "invoice", attachments, nil)
+	if err != nil {
+		app.badRequest(w, r, err)
+		return
+	}
 	// send response
 	var resp struct {
 		Error   bool   `json:"error"`

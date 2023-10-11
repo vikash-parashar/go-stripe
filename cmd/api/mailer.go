@@ -17,7 +17,7 @@ func (app *application) SendMail(from, to, subject, tmpl string, data interface{
 
 	templateToRender := fmt.Sprintf("templates/%s.html.tmpl", tmpl)
 
-	t, err := template.New("email-html").ParseFS(emailTemplateFS, "")
+	t, err := template.New("email-html").ParseFS(emailTemplateFS, templateToRender)
 	if err != nil {
 		app.errorLog.Println(err)
 		return err
